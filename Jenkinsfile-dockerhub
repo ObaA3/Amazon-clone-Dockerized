@@ -10,11 +10,6 @@ pipeline {
         APP_NAME = "obaa3/amazon"
     }
 
-    tools {
-        // Matches the SonarQube Scanner tool you defined in Jenkins → Global Tool Configuration
-        SonarQubeScanner 'ibt-sonarqube'
-    }
-
     stages { 
         stage('SCM Checkout') {
             steps {
@@ -25,7 +20,7 @@ pipeline {
         stage('Run SonarQube Analysis') {
             steps {
                 // Matches the name you set in Jenkins → Configure System → SonarQube servers
-                withSonarQubeEnv('sonarqube') {
+                withSonarQubeEnv('ibt-sonarqube') {
                     sh '''
                         ${SONAR_SCANNER_HOME}/bin/sonar-scanner \
                           -Dsonar.projectKey=amazon-clone \
