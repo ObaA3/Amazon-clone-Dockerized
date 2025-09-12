@@ -21,7 +21,7 @@ pipeline {
             steps {
                 // Matches the name you set in Jenkins → Configure System → SonarQube servers
                 withSonarQubeEnv('ibt-sonarqube') {
-                    sh '''
+                    bat '''
                         ${SONAR_SCANNER_HOME}/bin/sonar-scanner \
                           -Dsonar.projectKey=amazon-clone \
                           -Dsonar.projectName="Amazon Clone" \
@@ -63,10 +63,3 @@ pipeline {
             } 
         } 
     }
-
-    post { 
-        always { 
-            slackSend color: "good", message: "Build Deployed Successfully, Downstream Job Triggered"
-        }
-    }
-}
